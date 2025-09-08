@@ -21,6 +21,56 @@
   opacity: 0.9;
 }
 
+.clickable-title,
+.clickable-subtitle {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.clickable-title:hover,
+.clickable-subtitle:hover {
+  opacity: 0.8;
+}
+
+.editable-title {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 300;
+  padding: 8px 16px;
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.editable-title:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.editable-subtitle {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  color: white;
+  font-size: 1.1rem;
+  padding: 6px 12px;
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.editable-subtitle:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.15);
+}
+
 .management-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
