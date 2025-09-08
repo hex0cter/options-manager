@@ -1,26 +1,26 @@
-import React from 'react';
-import './StatusToggle.css';
+import React from "react";
+import "./StatusToggle.css";
 
 const StatusToggle = ({ status, onClick }) => {
   const getStatusConfig = (status) => {
     switch (status) {
-      case 'on':
+      case "on":
         return {
-          className: 'status-on',
-          text: '✓',
-          label: 'On'
+          className: "status-on",
+          text: "✓",
+          label: "Yes",
         };
-      case 'off':
+      case "off":
         return {
-          className: 'status-off',
-          text: '✗',
-          label: 'Off'
+          className: "status-off",
+          text: "✗",
+          label: "No",
         };
       default:
         return {
-          className: 'status-unknown',
-          text: '?',
-          label: 'Unknown'
+          className: "status-unknown",
+          text: "?",
+          label: "Unknown",
         };
     }
   };

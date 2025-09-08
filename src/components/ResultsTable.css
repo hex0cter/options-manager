@@ -75,6 +75,8 @@
 .status-cell {
   background: #fafafa;
   vertical-align: middle;
+  text-align: center;
+  display: table-cell;
 }
 
 .results-table tbody tr:hover .status-cell {

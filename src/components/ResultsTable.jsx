@@ -64,7 +64,7 @@ const ResultsTable = ({ options, participants, preferences, onTogglePreference, 
   };
 
   const getSortIcon = (criteria) => {
-    if (sortBy !== criteria) return '↕️';
+    if (sortBy !== criteria) return '';
     return sortOrder === 'asc' ? '↑' : '↓';
   };
 
@@ -99,21 +99,21 @@ const ResultsTable = ({ options, participants, preferences, onTogglePreference, 
                   <span
                     className="sort-button"
                     onClick={() => handleSort('yes')}
-                    title="Sort by Yes votes"
+                    title="Sort by Yes"
                   >
                     ✓ {getSortIcon('yes')}
                   </span>
                   <span
                     className="sort-button"
                     onClick={() => handleSort('no')}
-                    title="Sort by No votes"
+                    title="Sort by No"
                   >
                     ✗ {getSortIcon('no')}
                   </span>
                   <span
                     className="sort-button"
                     onClick={() => handleSort('unknown')}
-                    title="Sort by Unknown votes"
+                    title="Sort by Unknown"
                   >
                     ? {getSortIcon('unknown')}
                   </span>
