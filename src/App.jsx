@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import OptionsManager from './components/OptionsManager';
-import ParticipantsManager from './components/ParticipantsManager';
-import ResultsTable from './components/ResultsTable';
+import OptionsManager from './components/OptionsManager.jsx';
+import ParticipantsManager from './components/ParticipantsManager.jsx';
+import ResultsTable from './components/ResultsTable.jsx';
 
 function App() {
   const [options, setOptions] = useState([]);

@@ -1,6 +1,6 @@
 import React from 'react';
 import './ResultsTable.css';
-import StatusToggle from './StatusToggle';
+import StatusToggle from './StatusToggle.jsx';
 
 const ResultsTable = ({ options, participants, preferences, onTogglePreference }) => {
   if (options.length === 0 || participants.length === 0) {
