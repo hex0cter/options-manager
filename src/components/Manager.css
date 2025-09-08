@@ -111,3 +111,31 @@
   font-size: 14px;
   font-weight: 500;
 }
+
+.clickable-section-label {
+  cursor: pointer;
+  transition: color 0.2s;
+  user-select: none;
+}
+
+.clickable-section-label:hover {
+  color: #667eea;
+}
+
+.editable-section-label {
+  background: #f7fafc;
+  border: 2px solid #667eea;
+  border-radius: 6px;
+  color: #4a5568;
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 8px 12px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.editable-section-label:focus {
+  outline: none;
+  border-color: #5a67d8;
+  background: white;
+}

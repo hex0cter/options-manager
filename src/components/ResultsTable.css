@@ -65,6 +65,13 @@
   min-width: 120px;
 }
 
+.summary-header {
+  background: #e2e8f0;
+  font-weight: 600;
+  color: #4a5568;
+  min-width: 140px;
+}
+
 .status-cell {
   background: #fafafa;
   vertical-align: middle;
@@ -76,6 +83,89 @@
 
 .results-table tbody tr:hover .option-cell {
   background: #edf2f7;
+}
+
+.summary-cell {
+  background: #f8fafc;
+  padding: 12px 8px;
+  vertical-align: middle;
+}
+
+.summary-content {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.summary-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 32px;
+  justify-content: center;
+}
+
+.summary-yes {
+  background: rgba(72, 187, 120, 0.1);
+  color: #2f855a;
+}
+
+.summary-no {
+  background: rgba(245, 101, 101, 0.1);
+  color: #c53030;
+}
+
+.summary-unknown {
+  background: rgba(160, 174, 192, 0.1);
+  color: #4a5568;
+}
+
+.summary-icon {
+  font-size: 10px;
+}
+
+.summary-count {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s;
+}
+
+.sortable:hover {
+  background: #e2e8f0;
+}
+
+.summary-sort-container {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.sort-button {
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.sort-button:hover {
+  background: rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 768px) {

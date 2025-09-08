@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './Manager.css';
 
-const ParticipantsManager = ({ participants, onAdd, onEdit, onDelete }) => {
+const ParticipantsManager = ({ participants, onAdd, onEdit, onDelete, label, onLabelChange }) => {
   const [inputValue, setInputValue] = useState('');
   const [editingId, setEditingId] = useState(null);
   const [editValue, setEditValue] = useState('');
+  const [editingLabel, setEditingLabel] = useState(false);
 
   const handleAdd = () => {
     if (inputValue.trim()) {
@@ -47,9 +48,41 @@ const ParticipantsManager = ({ participants, onAdd, onEdit, onDelete }) => {
     }
   };
 
+  const handleLabelClick = () => {
+    setEditingLabel(true);
+  };
+
+  const handleLabelChange = (e) => {
+    onLabelChange(e.target.value);
+  };
+
+  const handleLabelKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      setEditingLabel(false);
+    }
+  };
+
+  const handleLabelBlur = () => {
+    setEditingLabel(false);
+  };
+
   return (
     <div className="manager-container">
-      <h2>Participants</h2>
+      {editingLabel ? (
+        <input
+          type="text"
+          value={label}
+          onChange={handleLabelChange}
+          onKeyPress={handleLabelKeyPress}
+          onBlur={handleLabelBlur}
+          className="editable-section-label"
+          autoFocus
+        />
+      ) : (
+        <h2 onClick={handleLabelClick} className="clickable-section-label" title="Click to edit">
+          {label}
+        </h2>
+      )}
       <div className="input-group">
         <input
           type="text"

@@ -13,6 +13,8 @@ function App() {
   const [editingTitle, setEditingTitle] = useState(false);
   const [editingSubtitle, setEditingSubtitle] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [optionsLabel, setOptionsLabel] = useState('Options');
+  const [participantsLabel, setParticipantsLabel] = useState('Participants');
 
   // Load data from localStorage on mount
   useEffect(() => {
@@ -25,6 +27,8 @@ function App() {
         setPreferences(data.preferences || {});
         setTitle(data.title || "Participant Options Manager");
         setSubtitle(data.subtitle || "Manage participants and their preferences for different options");
+        setOptionsLabel(data.optionsLabel || 'Options');
+        setParticipantsLabel(data.participantsLabel || 'Participants');
       } catch (error) {
         console.error("Error loading data from localStorage:", error);
       }
@@ -35,11 +39,11 @@ function App() {
   // Save data to localStorage whenever state changes (but only after initial load)
   useEffect(() => {
     if (isLoaded) {
-      const data = { options, participants, preferences, title, subtitle };
+      const data = { options, participants, preferences, title, subtitle, optionsLabel, participantsLabel };
       localStorage.setItem("participantOptionsData", JSON.stringify(data));
       console.log("Data saved to localStorage:", data);
     }
-  }, [options, participants, preferences, title, subtitle, isLoaded]);
+  }, [options, participants, preferences, title, subtitle, optionsLabel, participantsLabel, isLoaded]);
 
   const generateId = () => {
     return Date.now().toString(36) + Math.random().toString(36).substr(2);
@@ -172,12 +176,21 @@ function App() {
       </header>
 
       <div className="management-section">
-        <OptionsManager options={options} onAdd={addOption} onEdit={editOption} onDelete={deleteOption} />
+        <OptionsManager
+          options={options}
+          onAdd={addOption}
+          onEdit={editOption}
+          onDelete={deleteOption}
+          label={optionsLabel}
+          onLabelChange={setOptionsLabel}
+        />
         <ParticipantsManager
           participants={participants}
           onAdd={addParticipant}
           onEdit={editParticipant}
           onDelete={deleteParticipant}
+          label={participantsLabel}
+          onLabelChange={setParticipantsLabel}
         />
       </div>
 
@@ -186,6 +199,7 @@ function App() {
         participants={participants}
         preferences={preferences}
         onTogglePreference={togglePreference}
+        optionsLabel={optionsLabel}
       />
     </div>
   );
