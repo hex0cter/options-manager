@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Manager.css';
 
-const OptionsManager = ({ options, onAdd, onEdit, onDelete, label, onLabelChange }) => {
+const OptionsManager = ({ options, onAdd, onEdit, onDelete, label, onLabelChange, isCollapsed }) => {
   const [inputValue, setInputValue] = useState('');
   const [editingId, setEditingId] = useState(null);
   const [editValue, setEditValue] = useState('');
@@ -68,61 +68,66 @@ const OptionsManager = ({ options, onAdd, onEdit, onDelete, label, onLabelChange
 
   return (
     <div className="manager-container">
-      {editingLabel ? (
-        <input
-          type="text"
-          value={label}
-          onChange={handleLabelChange}
-          onKeyPress={handleLabelKeyPress}
-          onBlur={handleLabelBlur}
-          className="editable-section-label"
-          autoFocus
-        />
-      ) : (
-        <h2 onClick={handleLabelClick} className="clickable-section-label" title="Click to edit">
-          {label}
-        </h2>
-      )}
-      <div className="input-group">
-        <input
-          type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyPress={handleKeyPress}
-          placeholder="Add new option"
-        />
-        <button onClick={handleAdd}>Add Option</button>
+      <div className="section-header">
+        {editingLabel ? (
+          <input
+            type="text"
+            value={label}
+            onChange={handleLabelChange}
+            onKeyPress={handleLabelKeyPress}
+            onBlur={handleLabelBlur}
+            className="editable-section-label"
+            autoFocus
+          />
+        ) : (
+          <h2 onClick={handleLabelClick} className="clickable-section-label" title="Click to edit">
+            {label}
+          </h2>
+        )}
+
       </div>
-      <ul className="items-list">
-        {options.map(option => (
-          <li key={option.id} className="list-item">
-            {editingId === option.id ? (
-              <div className="edit-input-group">
-                <input
-                  type="text"
-                  value={editValue}
-                  onChange={(e) => setEditValue(e.target.value)}
-                  onKeyPress={handleEditKeyPress}
-                  onBlur={handleEdit}
-                  autoFocus
-                />
-              </div>
-            ) : (
-              <>
-                <span>{option.name}</span>
-                <div className="item-actions">
-                  <button className="edit-btn" onClick={() => startEdit(option)}>
-                    Edit
-                  </button>
-                  <button className="delete-btn" onClick={() => handleDelete(option.id)}>
-                    Delete
-                  </button>
+      <div className={`collapsible-content ${isCollapsed ? 'collapsed' : 'expanded'}`}>
+        <div className="input-group">
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Add new option"
+          />
+          <button onClick={handleAdd}>Add Option</button>
+        </div>
+        <ul className="items-list">
+          {options.map(option => (
+            <li key={option.id} className="list-item">
+              {editingId === option.id ? (
+                <div className="edit-input-group">
+                  <input
+                    type="text"
+                    value={editValue}
+                    onChange={(e) => setEditValue(e.target.value)}
+                    onKeyPress={handleEditKeyPress}
+                    onBlur={handleEdit}
+                    autoFocus
+                  />
                 </div>
-              </>
-            )}
-          </li>
-        ))}
-      </ul>
+              ) : (
+                <>
+                  <span>{option.name}</span>
+                  <div className="item-actions">
+                    <button className="edit-btn" onClick={() => startEdit(option)}>
+                      Edit
+                    </button>
+                    <button className="delete-btn" onClick={() => handleDelete(option.id)}>
+                      Delete
+                    </button>
+                  </div>
+                </>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

@@ -1,8 +1,30 @@
 .manager-container {
   background: white;
-  padding: 25px;
+  padding: 1em;
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.collapsible-content {
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.collapsible-content.collapsed {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-10px);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.collapsible-content.expanded {
+  max-height: 1000px;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .manager-container h2 {
@@ -14,7 +36,8 @@
 .input-group {
   display: flex;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 .input-group input {
@@ -138,4 +161,41 @@
   outline: none;
   border-color: #5a67d8;
   background: white;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-header h2 {
+  margin-bottom: 0;
+}
+
+.collapse-toggle {
+  background: #e2e8f0;
+  border: none;
+  border-radius: 6px;
+  color: #4a5568;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 12px;
+  transition: all 0.2s;
+  user-select: none;
+  min-width: 40px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.collapse-toggle:hover {
+  background: #cbd5e0;
+  color: #2d3748;
+}
+
+.collapse-toggle:active {
+  transform: translateY(1px);
 }

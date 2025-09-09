@@ -15,6 +15,7 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [optionsLabel, setOptionsLabel] = useState('Options');
   const [participantsLabel, setParticipantsLabel] = useState('Participants');
+  const [sectionsCollapsed, setSectionsCollapsed] = useState(false);
 
   // Load data from localStorage on mount
   useEffect(() => {
@@ -175,6 +176,16 @@ function App() {
         )}
       </header>
 
+      <div className="management-controls">
+        <button
+          className="collapse-all-button"
+          onClick={() => setSectionsCollapsed(!sectionsCollapsed)}
+          title={sectionsCollapsed ? 'Expand management sections' : 'Collapse management sections'}
+        >
+          {sectionsCollapsed ? 'Expand Management ▼' : 'Collapse Management ▲'}
+        </button>
+      </div>
+
       <div className="management-section">
         <OptionsManager
           options={options}
@@ -183,6 +194,7 @@ function App() {
           onDelete={deleteOption}
           label={optionsLabel}
           onLabelChange={setOptionsLabel}
+          isCollapsed={sectionsCollapsed}
         />
         <ParticipantsManager
           participants={participants}
@@ -191,6 +203,7 @@ function App() {
           onDelete={deleteParticipant}
           label={participantsLabel}
           onLabelChange={setParticipantsLabel}
+          isCollapsed={sectionsCollapsed}
         />
       </div>
 

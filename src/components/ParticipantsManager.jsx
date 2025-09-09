@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Manager.css';
 
-const ParticipantsManager = ({ participants, onAdd, onEdit, onDelete, label, onLabelChange }) => {
+const ParticipantsManager = ({ participants, onAdd, onEdit, onDelete, label, onLabelChange, isCollapsed }) => {
   const [inputValue, setInputValue] = useState('');
   const [editingId, setEditingId] = useState(null);
   const [editValue, setEditValue] = useState('');
@@ -68,61 +68,66 @@ const ParticipantsManager = ({ participants, onAdd, onEdit, onDelete, label, onL
 
   return (
     <div className="manager-container">
-      {editingLabel ? (
-        <input
-          type="text"
-          value={label}
-          onChange={handleLabelChange}
-          onKeyPress={handleLabelKeyPress}
-          onBlur={handleLabelBlur}
-          className="editable-section-label"
-          autoFocus
-        />
-      ) : (
-        <h2 onClick={handleLabelClick} className="clickable-section-label" title="Click to edit">
-          {label}
-        </h2>
-      )}
-      <div className="input-group">
-        <input
-          type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyPress={handleKeyPress}
-          placeholder="Add new participant"
-        />
-        <button onClick={handleAdd}>Add Participant</button>
+      <div className="section-header">
+        {editingLabel ? (
+          <input
+            type="text"
+            value={label}
+            onChange={handleLabelChange}
+            onKeyPress={handleLabelKeyPress}
+            onBlur={handleLabelBlur}
+            className="editable-section-label"
+            autoFocus
+          />
+        ) : (
+          <h2 onClick={handleLabelClick} className="clickable-section-label" title="Click to edit">
+            {label}
+          </h2>
+        )}
+
       </div>
-      <ul className="items-list">
-        {participants.map(participant => (
-          <li key={participant.id} className="list-item">
-            {editingId === participant.id ? (
-              <div className="edit-input-group">
-                <input
-                  type="text"
-                  value={editValue}
-                  onChange={(e) => setEditValue(e.target.value)}
-                  onKeyPress={handleEditKeyPress}
-                  onBlur={handleEdit}
-                  autoFocus
-                />
-              </div>
-            ) : (
-              <>
-                <span>{participant.name}</span>
-                <div className="item-actions">
-                  <button className="edit-btn" onClick={() => startEdit(participant)}>
-                    Edit
-                  </button>
-                  <button className="delete-btn" onClick={() => handleDelete(participant.id)}>
-                    Delete
-                  </button>
+      <div className={`collapsible-content ${isCollapsed ? 'collapsed' : 'expanded'}`}>
+        <div className="input-group">
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Add new participant"
+          />
+          <button onClick={handleAdd}>Add Participant</button>
+        </div>
+        <ul className="items-list">
+          {participants.map(participant => (
+            <li key={participant.id} className="list-item">
+              {editingId === participant.id ? (
+                <div className="edit-input-group">
+                  <input
+                    type="text"
+                    value={editValue}
+                    onChange={(e) => setEditValue(e.target.value)}
+                    onKeyPress={handleEditKeyPress}
+                    onBlur={handleEdit}
+                    autoFocus
+                  />
                 </div>
-              </>
-            )}
-          </li>
-        ))}
-      </ul>
+              ) : (
+                <>
+                  <span>{participant.name}</span>
+                  <div className="item-actions">
+                    <button className="edit-btn" onClick={() => startEdit(participant)}>
+                      Edit
+                    </button>
+                    <button className="delete-btn" onClick={() => handleDelete(participant.id)}>
+                      Delete
+                    </button>
+                  </div>
+                </>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
