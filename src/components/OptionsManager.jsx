@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import './Manager.css';
+import React, { useState } from "react";
+import "./Manager.css";
 
 const OptionsManager = ({ options, onAdd, onEdit, onDelete, label, onLabelChange, isCollapsed }) => {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
   const [editingId, setEditingId] = useState(null);
-  const [editValue, setEditValue] = useState('');
+  const [editValue, setEditValue] = useState("");
   const [editingLabel, setEditingLabel] = useState(false);
 
   const handleAdd = () => {
     if (inputValue.trim()) {
       onAdd(inputValue.trim());
-      setInputValue('');
+      setInputValue("");
     }
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleAdd();
     }
   };
@@ -29,16 +29,16 @@ const OptionsManager = ({ options, onAdd, onEdit, onDelete, label, onLabelChange
     if (editValue.trim()) {
       onEdit(editingId, editValue.trim());
       setEditingId(null);
-      setEditValue('');
+      setEditValue("");
     }
   };
 
   const handleEditKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleEdit();
-    } else if (e.key === 'Escape') {
+    } else if (e.key === "Escape") {
       setEditingId(null);
-      setEditValue('');
+      setEditValue("");
     }
   };
 
@@ -57,7 +57,7 @@ const OptionsManager = ({ options, onAdd, onEdit, onDelete, label, onLabelChange
   };
 
   const handleLabelKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       setEditingLabel(false);
     }
   };
@@ -84,9 +84,8 @@ const OptionsManager = ({ options, onAdd, onEdit, onDelete, label, onLabelChange
             {label}
           </h2>
         )}
-
       </div>
-      <div className={`collapsible-content ${isCollapsed ? 'collapsed' : 'expanded'}`}>
+      <div className={`collapsible-content ${isCollapsed ? "collapsed" : "expanded"}`}>
         <div className="input-group">
           <input
             type="text"
@@ -98,7 +97,7 @@ const OptionsManager = ({ options, onAdd, onEdit, onDelete, label, onLabelChange
           <button onClick={handleAdd}>Add Option</button>
         </div>
         <ul className="items-list">
-          {options.map(option => (
+          {options.map((option) => (
             <li key={option.id} className="list-item">
               {editingId === option.id ? (
                 <div className="edit-input-group">

@@ -96,7 +96,7 @@ function App() {
 
   const editParticipant = (id, newName) => {
     setParticipants(
-      participants.map((participant) => (participant.id === id ? { ...participant, name: newName } : participant))
+      participants.map((participant) => (participant.id === id ? { ...participant, name: newName } : participant)),
     );
   };
 

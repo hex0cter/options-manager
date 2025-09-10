@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import './ResultsTable.css';
-import StatusToggle from './StatusToggle.jsx';
+import React, { useState } from "react";
+import "./ResultsTable.css";
+import StatusToggle from "./StatusToggle.jsx";
 
-const ResultsTable = ({ options, participants, preferences, onTogglePreference, optionsLabel = 'Options' }) => {
-  const [sortBy, setSortBy] = useState('name'); // 'name', 'yes', 'no', 'unknown'
-  const [sortOrder, setSortOrder] = useState('asc'); // 'asc' or 'desc'
+const ResultsTable = ({ options, participants, preferences, onTogglePreference, optionsLabel = "Options" }) => {
+  const [sortBy, setSortBy] = useState("name"); // 'name', 'yes', 'no', 'unknown'
+  const [sortOrder, setSortOrder] = useState("asc"); // 'asc' or 'desc'
 
   const getSummary = (optionId) => {
     const counts = { on: 0, off: 0, unknown: 0 };
 
-    participants.forEach(participant => {
-      const status = preferences[optionId]?.[participant.id] || 'unknown';
+    participants.forEach((participant) => {
+      const status = preferences[optionId]?.[participant.id] || "unknown";
       counts[status]++;
     });
 
@@ -19,21 +19,21 @@ const ResultsTable = ({ options, participants, preferences, onTogglePreference, 
 
   const handleSort = (criteria) => {
     if (sortBy === criteria) {
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
       setSortBy(criteria);
-      setSortOrder('desc'); // Default to desc for counts, asc for name
-      if (criteria === 'name') {
-        setSortOrder('asc');
+      setSortOrder("desc"); // Default to desc for counts, asc for name
+      if (criteria === "name") {
+        setSortOrder("asc");
       }
     }
   };
 
   const getSortedOptions = () => {
     return [...options].sort((a, b) => {
-      if (sortBy === 'name') {
+      if (sortBy === "name") {
         const comparison = a.name.localeCompare(b.name);
-        return sortOrder === 'asc' ? comparison : -comparison;
+        return sortOrder === "asc" ? comparison : -comparison;
       }
 
       const summaryA = getSummary(a.id);
@@ -42,15 +42,15 @@ const ResultsTable = ({ options, participants, preferences, onTogglePreference, 
       let valueA, valueB;
 
       switch (sortBy) {
-        case 'yes':
+        case "yes":
           valueA = summaryA.on;
           valueB = summaryB.on;
           break;
-        case 'no':
+        case "no":
           valueA = summaryA.off;
           valueB = summaryB.off;
           break;
-        case 'unknown':
+        case "unknown":
           valueA = summaryA.unknown;
           valueB = summaryB.unknown;
           break;
@@ -59,13 +59,13 @@ const ResultsTable = ({ options, participants, preferences, onTogglePreference, 
       }
 
       const comparison = valueA - valueB;
-      return sortOrder === 'asc' ? comparison : -comparison;
+      return sortOrder === "asc" ? comparison : -comparison;
     });
   };
 
   const getSortIcon = (criteria) => {
-    if (sortBy !== criteria) return '';
-    return sortOrder === 'asc' ? '↑' : '↓';
+    if (sortBy !== criteria) return "";
+    return sortOrder === "asc" ? "↑" : "↓";
   };
 
   if (options.length === 0 || participants.length === 0) {
@@ -86,55 +86,40 @@ const ResultsTable = ({ options, participants, preferences, onTogglePreference, 
         <table className="results-table">
           <thead>
             <tr>
-              <th className="option-header sortable" onClick={() => handleSort('name')}>
-                {optionsLabel} {getSortIcon('name')}
+              <th className="option-header sortable" onClick={() => handleSort("name")}>
+                {optionsLabel} {getSortIcon("name")}
               </th>
-              {participants.map(participant => (
+              {participants.map((participant) => (
                 <th key={participant.id} className="participant-header">
                   {participant.name}
                 </th>
               ))}
               <th className="summary-header">
                 <div className="summary-sort-container">
-                  <span
-                    className="sort-button"
-                    onClick={() => handleSort('yes')}
-                    title="Sort by Yes"
-                  >
-                    ✓ {getSortIcon('yes')}
+                  <span className="sort-button" onClick={() => handleSort("yes")} title="Sort by Yes">
+                    ✓ {getSortIcon("yes")}
                   </span>
-                  <span
-                    className="sort-button"
-                    onClick={() => handleSort('no')}
-                    title="Sort by No"
-                  >
-                    ✗ {getSortIcon('no')}
+                  <span className="sort-button" onClick={() => handleSort("no")} title="Sort by No">
+                    ✗ {getSortIcon("no")}
                   </span>
-                  <span
-                    className="sort-button"
-                    onClick={() => handleSort('unknown')}
-                    title="Sort by Unknown"
-                  >
-                    ? {getSortIcon('unknown')}
+                  <span className="sort-button" onClick={() => handleSort("unknown")} title="Sort by Unknown">
+                    ? {getSortIcon("unknown")}
                   </span>
                 </div>
               </th>
             </tr>
           </thead>
           <tbody>
-            {getSortedOptions().map(option => {
+            {getSortedOptions().map((option) => {
               const summary = getSummary(option.id);
               return (
                 <tr key={option.id}>
                   <td className="option-cell">{option.name}</td>
-                  {participants.map(participant => {
-                    const status = preferences[option.id]?.[participant.id] || 'unknown';
+                  {participants.map((participant) => {
+                    const status = preferences[option.id]?.[participant.id] || "unknown";
                     return (
                       <td key={participant.id} className="status-cell">
-                        <StatusToggle
-                          status={status}
-                          onClick={() => onTogglePreference(option.id, participant.id)}
-                        />
+                        <StatusToggle status={status} onClick={() => onTogglePreference(option.id, participant.id)} />
                       </td>
                     );
                   })}
