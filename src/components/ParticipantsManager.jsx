@@ -42,9 +42,9 @@ const ParticipantsManager = ({ participants, onAdd, onEdit, onDelete, label, onL
     }
   };
 
-  const handleDelete = (id) => {
-    if (window.confirm('Are you sure you want to delete this participant?')) {
-      onDelete(id);
+  const handleDelete = (participant) => {
+    if (window.confirm(`Are you sure you want to delete "${participant.name}"?`)) {
+      onDelete(participant.id);
     }
   };
 
@@ -118,7 +118,7 @@ const ParticipantsManager = ({ participants, onAdd, onEdit, onDelete, label, onL
                     <button className="edit-btn" onClick={() => startEdit(participant)}>
                       Edit
                     </button>
-                    <button className="delete-btn" onClick={() => handleDelete(participant.id)}>
+                    <button className="delete-btn" onClick={() => handleDelete(participant)}>
                       Delete
                     </button>
                   </div>

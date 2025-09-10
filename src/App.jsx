@@ -13,8 +13,8 @@ function App() {
   const [editingTitle, setEditingTitle] = useState(false);
   const [editingSubtitle, setEditingSubtitle] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [optionsLabel, setOptionsLabel] = useState('Options');
-  const [participantsLabel, setParticipantsLabel] = useState('Participants');
+  const [optionsLabel, setOptionsLabel] = useState("Options");
+  const [participantsLabel, setParticipantsLabel] = useState("Participants");
   const [sectionsCollapsed, setSectionsCollapsed] = useState(false);
 
   // Load data from localStorage on mount
@@ -28,8 +28,9 @@ function App() {
         setPreferences(data.preferences || {});
         setTitle(data.title || "Participant Options Manager");
         setSubtitle(data.subtitle || "Manage participants and their preferences for different options");
-        setOptionsLabel(data.optionsLabel || 'Options');
-        setParticipantsLabel(data.participantsLabel || 'Participants');
+        setOptionsLabel(data.optionsLabel || "Options");
+        setParticipantsLabel(data.participantsLabel || "Participants");
+        setSectionsCollapsed(data.sectionsCollapsed || false);
       } catch (error) {
         console.error("Error loading data from localStorage:", error);
       }
@@ -40,11 +41,30 @@ function App() {
   // Save data to localStorage whenever state changes (but only after initial load)
   useEffect(() => {
     if (isLoaded) {
-      const data = { options, participants, preferences, title, subtitle, optionsLabel, participantsLabel };
+      const data = {
+        options,
+        participants,
+        preferences,
+        title,
+        subtitle,
+        optionsLabel,
+        participantsLabel,
+        sectionsCollapsed,
+      };
       localStorage.setItem("participantOptionsData", JSON.stringify(data));
-      console.log("Data saved to localStorage:", data);
+      // console.log("Data saved to localStorage:", data);
     }
-  }, [options, participants, preferences, title, subtitle, optionsLabel, participantsLabel, isLoaded]);
+  }, [
+    options,
+    participants,
+    preferences,
+    title,
+    subtitle,
+    optionsLabel,
+    participantsLabel,
+    sectionsCollapsed,
+    isLoaded,
+  ]);
 
   const generateId = () => {
     return Date.now().toString(36) + Math.random().toString(36).substr(2);
@@ -180,9 +200,9 @@ function App() {
         <button
           className="collapse-all-button"
           onClick={() => setSectionsCollapsed(!sectionsCollapsed)}
-          title={sectionsCollapsed ? 'Expand management sections' : 'Collapse management sections'}
+          title={sectionsCollapsed ? "Expand management sections" : "Collapse management sections"}
         >
-          {sectionsCollapsed ? 'Expand Management ▼' : 'Collapse Management ▲'}
+          {sectionsCollapsed ? "Expand Management ▼" : "Collapse Management ▲"}
         </button>
       </div>
 

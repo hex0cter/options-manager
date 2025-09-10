@@ -42,9 +42,9 @@ const OptionsManager = ({ options, onAdd, onEdit, onDelete, label, onLabelChange
     }
   };
 
-  const handleDelete = (id) => {
-    if (window.confirm('Are you sure you want to delete this option?')) {
-      onDelete(id);
+  const handleDelete = (option) => {
+    if (window.confirm(`Are you sure you want to delete "${option.name}"?`)) {
+      onDelete(option.id);
     }
   };
 
@@ -118,7 +118,7 @@ const OptionsManager = ({ options, onAdd, onEdit, onDelete, label, onLabelChange
                     <button className="edit-btn" onClick={() => startEdit(option)}>
                       Edit
                     </button>
-                    <button className="delete-btn" onClick={() => handleDelete(option.id)}>
+                    <button className="delete-btn" onClick={() => handleDelete(option)}>
                       Delete
                     </button>
                   </div>
